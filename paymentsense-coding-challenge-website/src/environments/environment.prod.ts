@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  api: 'https://restcountries.eu/rest/v2',
+  api: 'http://localhost:44341',
   debounceDuration: 800,
   pageLimit: 10
 };

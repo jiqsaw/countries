@@ -17,9 +17,9 @@ export class ListComponent implements OnInit {
   public faSearch = faSearch;
   public countries: ICountry[];
   public q = '';
-  public params: ICountryParam = { page: 1, limit: environment.pageLimit }
+  public params: ICountryParam = { page: 1, limit: environment.pageLimit };
   public params$ = new Subject<ICountryParam>();
-  public total: number = 180;
+  public total: number;
 
   constructor(private countryService: CountryService) { }
 
@@ -30,7 +30,10 @@ export class ListComponent implements OnInit {
   public loadCountries(): void {
     this.countryService.getCountries(this.params$)
       .subscribe(
-        res => this.countries = res,
+        res => {
+          this.countries = res.data;
+          this.total = res.meta.total;
+        },
         _ => this.countries = null
       );
     this.params$.next(this.params);

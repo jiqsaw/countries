@@ -15,6 +15,7 @@ export class HeaderComponent {
   public faThumbsUp = faThumbsUp;
   public faThumbsDown = faThumbsDown;
   public isApiReady = false;
+  public title = 'Paymentsense Coding Challenge!';
 
   constructor(private apiService: PaymentsenseCodingChallengeApiService) {
 

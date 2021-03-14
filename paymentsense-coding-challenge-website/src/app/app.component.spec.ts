@@ -1,16 +1,29 @@
-import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { async, TestBed } from '@angular/core/testing';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DetailModule } from './detail/detail.module';
+import { HeaderComponent } from './header/header.component';
+import { HeaderModule } from './header/header.module';
+import { ListModule } from './list/list.module';
 import { PaymentsenseCodingChallengeApiService } from './services';
 import { MockPaymentsenseCodingChallengeApiService } from './testing/mock-paymentsense-coding-challenge-api.service';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule,
-        FontAwesomeModule
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        FontAwesomeModule,
+        HeaderModule,
+        ListModule,
+        DetailModule
       ],
       declarations: [
         AppComponent
@@ -28,8 +41,9 @@ describe('AppComponent', () => {
   });
 
   it(`should have as title 'Paymentsense Coding Challenge'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
+    const fixture = TestBed.createComponent(HeaderComponent);
     const app = fixture.debugElement.componentInstance;
+    console.log('app:', app)
     expect(app.title).toEqual('Paymentsense Coding Challenge!');
   });
 

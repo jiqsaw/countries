@@ -15,7 +15,7 @@
     <p class="loading" *ngIf="countries.length === 0">No data found!</p>
 
     <a class="list__item" [routerLink]="['/detail', item.alpha2Code.toLowerCase()]"
-      routerLinkActive="router-link-active" *ngFor="let item of countries | paginate: { id: 'server', itemsPerPage: params.limit, currentPage: params.page, totalItems: 100 }">
+      routerLinkActive="router-link-active" *ngFor="let item of countries | paginate: { id: 'server', itemsPerPage: params.limit, currentPage: params.page, totalItems: total }">
       <img [src]="item.flag" alt="County Flag" />
       <span>{{item.name}}</span>
     </a>
