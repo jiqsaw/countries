@@ -1,0 +1,27 @@
+<div class="list box">
+
+  <span class="loading" *ngIf="!countries && countries !== null">Loading...</span>
+
+  <h3 *ngIf="countries === null">An error occurred!</h3>
+
+  <ng-container *ngIf="countries">
+
+    <div class="search">
+      <fa-icon [icon]=faSearch [classes]="['search__icon']"></fa-icon>
+      <input class="search__input" #inputSearch type="text" placeholder="Search" [(ngModel)]="q"
+        (ngModelChange)="onSearchChange($event)">
+    </div>
+
+    <p class="loading" *ngIf="countries.length === 0">No data found!</p>
+
+    <a class="list__item" [routerLink]="['/detail', item.alpha2Code.toLowerCase()]"
+      routerLinkActive="router-link-active" *ngFor="let item of countries | paginate: { id: 'server', itemsPerPage: params.limit, currentPage: params.page, totalItems: 100 }">
+      <img [src]="item.flag" alt="County Flag" />
+      <span>{{item.name}}</span>
+    </a>
+
+    <pagination-controls (pageChange)="getPage($event)" id="server" class="pagination"></pagination-controls>
+
+  </ng-container>
+
+</div>

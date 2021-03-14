@@ -1,0 +1,21 @@
+@import "variables";
+
+.header {
+  &__logo {
+    width: 30vw;
+  }
+  &__icon-down path {
+    fill: red;
+  }
+  &__icon-up path {
+    fill: green;
+  }
+}
+
+@media screen and (max-width: $screenWidth) {
+  .header {
+    &__logo {
+      width: 50vw;
+    }
+  }
+}

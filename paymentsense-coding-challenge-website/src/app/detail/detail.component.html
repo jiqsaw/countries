@@ -1,0 +1,37 @@
+<div class="detail box">
+
+  <a [routerLink]="['/']" class="detail__back">
+    <fa-icon [icon]=faArrowAltCircleLeft [classes]="['header__icon-down']"></fa-icon>
+    back
+  </a>
+
+  <p class="loading" *ngIf="!country && country !== null">Loading...</p>
+
+  <h3 *ngIf="country === null">Country detail cannot be fetched!</h3>
+
+  <ng-container *ngIf="country">
+    <h1>{{country.name}}</h1>
+
+    <div class="detail__content">
+
+      <div class="detail__item">
+        <span class="detail__label">Capital:</span>
+        <span class="detail__value">{{country.capital}}</span>
+      </div>
+
+      <div class="detail__item">
+        <span class="detail__label">Region:</span>
+        <span class="detail__value">{{country.region}}</span>
+      </div>
+
+      <div class="detail__item">
+        <span class="detail__label">Languages:</span>
+        <span class="detail__value" *ngFor="let language of country.languages; let i = index">
+          {{language.name}}<ng-container *ngIf="i < country.languages.length - 1">,</ng-container>
+        </span>
+      </div>
+
+    </div>
+  </ng-container>
+
+</div>

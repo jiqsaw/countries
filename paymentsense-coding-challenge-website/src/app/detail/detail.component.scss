@@ -1,0 +1,31 @@
+.detail {
+
+  &__back {
+    opacity: .7;
+    text-decoration: none;
+    color: black;
+    opacity: .7;
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item {
+    margin: 12px 0;
+  }
+
+  &__label {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+
+  &__value {
+
+  }
+
+}
