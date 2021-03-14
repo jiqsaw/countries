@@ -1,15 +1,21 @@
-import { async, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CountryService } from '../services/country.service';
-import { CountryApiService } from '../testing/country-api.service';
+import { CountryApiService } from '../testing/mock-country-api.service';
 import { ListComponent } from './list.component';
 
 describe('ListComponent', () => {
+
+  let component: ListComponent;
+  let fixture: ComponentFixture<ListComponent>;
+  let service: any;
+
   beforeEach(async(() => {
+
     TestBed.configureTestingModule({
       imports: [
         BrowserModule,
@@ -25,25 +31,27 @@ describe('ListComponent', () => {
         { provide: CountryService, useClass: CountryApiService }
       ]
     }).compileComponents();
+
+    service = TestBed.get(CountryService);
+
+    fixture = TestBed.createComponent(ListComponent);
+    component = fixture.componentInstance;
+    component.ngOnInit();
+
   }));
 
   it('should create the list component', () => {
-    const fixture = TestBed.createComponent(ListComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
+    expect(service.getCountries).toHaveBeenCalled();
   });
 
-  // it(`should have as title 'Paymentsense Coding Challenge'`, () => {
-  //   const fixture = TestBed.createComponent(HeaderComponent);
-  //   const app = fixture.debugElement.componentInstance;
-  //   console.log('app:', app)
-  //   expect(app.title).toEqual('Paymentsense Coding Challenge!');
-  // });
+  it(`should call search'`, () => {
+    component.onSearchChange('tur');
+    expect(component.params.q).toEqual('tur');
+    expect(service.getCountries).toHaveBeenCalled();
+    const filtered = component.countries.filter(e => !e.name.includes('tur'));
+    expect(filtered.length).toEqual(0);
+  });
 
-  // it('should render title in a h1 tag', () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   fixture.detectChanges();
-  //   const compiled = fixture.debugElement.nativeElement;
-  //   expect(compiled.querySelector('h1').textContent).toContain('Paymentsense Coding Challenge!');
-  // });
 });

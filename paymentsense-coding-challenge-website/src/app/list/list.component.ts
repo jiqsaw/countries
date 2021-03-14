@@ -44,7 +44,7 @@ export class ListComponent implements OnInit {
     this.params$.next(clone(this.params));
   }
 
-  getPage(page: number) {
+  public getPage(page: number) {
     this.countries = undefined;
     this.params.page = page;
     this.params$.next(clone(this.params));
